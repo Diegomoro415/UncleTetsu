@@ -1,29 +1,21 @@
-:root {
-    --navcolor: #463f3a;
-    --primary-color: #8a817c;
-    --secondary-color: #bcb8b1;
-    --textcolor: #faf3ee;
-    --pinkcolor: #e0afa0;
-}
-
 .my-navcolor {
-color: var(--navcolor);
-}
-
-.my-primary-color {
-color: var(--primary-color);
-}
-
-.my-secondary-color {
-color: var(--secondary-color);
-}
-
-.my-text-color {
-color: var(--textcolor);
-}
-
-.my-pinkcolor {
-color: var(--pinkcolor);
-}
+    background-color: #463f3a;
+    color: #ffffff;
+  }
   
+  .my-primary-color {
+    color: #8a817c;
+  }
+  
+  .my-secondary-color {
+    color: #bcb8b1;
+  }
+  
+  .my-text-color {
+    color: #faf3ee;
+  }
+  
+  .my-pinkcolor {
+    color: #e0afa0;
+  }
   

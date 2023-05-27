@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'fontawesome_5',
     'cloudinary_storage',
     'django.contrib.staticfiles',
     'cloudinary',
