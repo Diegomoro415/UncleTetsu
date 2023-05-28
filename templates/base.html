@@ -15,7 +15,7 @@
       <body>
         <!-- Navbar -->
         <nav class="navbar navbar-expand-lg my-navcolor">
-          <a class="navbar-brand" href="#"><img src="/media/ut_logo.webp" alt="Logo"></a>
+          <a class="navbar-brand" href="{% url 'home' %}"><img src="/media/ut_logo.webp" alt="Logo"></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -34,6 +34,15 @@
               <li class="nav-item">
                 <a class="nav-link my-text-color" href="{% url 'contact' %}">Contact</a>
               </li>
+              <li class="nav-item">
+                {% if user.is_authenticated %}
+                <!-- When user is logged in -->
+                <a class="nav-link my-text-color" href="{% url 'logout' %}">Logout</a>
+                {% else %}
+                <!-- When user is logged out -->
+                <a class="nav-link my-text-color" href="{% url 'login' %}">Login</a>
+                {% endif %}
+            </li>
             </ul>
           </div>
         </nav>

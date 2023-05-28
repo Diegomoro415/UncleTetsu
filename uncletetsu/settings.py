@@ -31,7 +31,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['tetsu.heroku.com', 'localhost']
+ALLOWED_HOSTS = ['tetsu.heroku.com', 'localhost',
+                 '8000-diegomoro415-uncletetsu-vpvz15y3sn.us2.codeanyapp.com']
 
 
 # Application definition
@@ -42,7 +43,6 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'fontawesome_5',
     'cloudinary_storage',
     'django.contrib.staticfiles',
     'cloudinary',
