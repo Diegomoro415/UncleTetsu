@@ -7,9 +7,4 @@ urlpatterns = [
     path('menu/', views.menu_page, name='menu'),
     path('reservation/', views.reservation_page, name='reservation'),
     path('contact/', views.contact_page, name='contact'),
-    path('login/', auth_views.LoginView.as_view(
-        template_name='login.html'), name='login'),
-    path('logout/', auth_views.LogoutView.as_view(
-        next_page='home'), name='logout'),
-    path('accounts/signup/', views.signup, name='signup'),
 ]

@@ -1,7 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 # Create your models here.
+
+STATUS = ((0, "Draft"), (1, "Published"))
 
 
 class FoodMenu(models.Model):
@@ -17,14 +20,22 @@ class DrinkMenu(models.Model):
 
 
 class Post(models.Model):
-    title = models.CharField(max_length=255)
-    author = models.CharField(max_length=255)
-    created_date = models.DateField()
-    update_date = models.DateField()
-    content = models.CharField(max_length=255)
-    excerpt = models.CharField(max_length=255)
-    slug = models.CharField(max_length=255)
-    status = models.CharField(max_length=255)
+    title = models.CharField(max_length=255, unique=True)
+    slug = models.CharField(max_length=255, unique=True)
+    author = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="review_post"
+    )
+    excerpt = models.TextField(blank=True)
+    updated_on = models.DateTimeField(auto_now=True)
+    content = models.TextField()
+    created_on = models.DateTimeField(default=timezone.now)
+    status = models.IntegerField(choices=STATUS, default=0)
+
+    class Meta:
+        ordering = ["-created_on"]
+
+    def __str__(self):
+        return self.title
 
 
 class Comment(models.Model):
@@ -43,7 +54,7 @@ class Table(models.Model):
     available = models.BooleanField()
 
 
-class Reserva(models.Model):
+class Reservation(models.Model):
     created_date = models.DateField()
     request_date = models.DateField()
     table = models.ForeignKey(Table, on_delete=models.CASCADE)
@@ -64,7 +75,7 @@ class User(models.Model):
     date_joined = models.DateTimeField()
 
 
-class Contato(models.Model):
+class Contact(models.Model):
     name = models.CharField(max_length=255)
     email = models.EmailField()
     phone = models.CharField(max_length=255)
