@@ -34,6 +34,12 @@ DEBUG = True
 ALLOWED_HOSTS = ['tetsu.heroku.com', 'localhost',
                  '8000-diegomoro415-uncletetsu-vpvz15y3sn.us2.codeanyapp.com']
 
+SITE_ID = 8
+
+AUTHENTICATION_BACKENDS = (
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
+)
 
 # Application definition
 
@@ -47,14 +53,14 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.google',
     'cloudinary_storage',
     'django.contrib.staticfiles',
     'cloudinary',
     'django_summernote',
     'tetsu_app',
 ]
-
-SITE_ID = 1
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
@@ -88,6 +94,22 @@ TEMPLATES = [
         },
     },
 ]
+
+# Provider specific settings
+SOCIALACCOUNT_PROVIDERS = {
+    'facebook': {
+        'APP': {
+            'client_id': 'seu_client_id_do_facebook',
+            'secret': 'seu_secret_do_facebook',
+        }
+    },
+    'google': {
+        'APP': {
+            'client_id': os.environ.get('GOOGLE_ID'),
+            'secret': os.environ.get('GOOGLE_SECRET'),
+        }
+    }
+}
 
 WSGI_APPLICATION = 'uncletetsu.wsgi.application'
 

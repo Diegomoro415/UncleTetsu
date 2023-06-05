@@ -2,19 +2,23 @@
 
 {% get_providers as socialaccount_providers %}
 
-{% for provider in socialaccount_providers %}
-{% if provider.id == "openid" %}
-{% for brand in provider.get_brands %}
-<li>
-  <a title="{{brand.name}}" 
-     class="socialaccount_provider {{provider.id}} {{brand.id}}" 
-     href="{% provider_login_url provider.id openid=brand.openid_url process=process %}"
-     >{{brand.name}}</a>
-</li>
-{% endfor %}
-{% endif %}
-<li>
-  <a title="{{provider.name}}" class="socialaccount_provider {{provider.id}}" 
-     href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}">{{provider.name}}</a>
-</li>
-{% endfor %}
+<div class="list-group">
+  {% for provider in socialaccount_providers %}
+    {% if provider.id == "facebook" %}
+      <a title="{{provider.name}}" class="btn-facebook list-group-item list-group-item-action sm_auth custom-facebook btn btn-primary" 
+         href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}">
+        <i class="fab fa-facebook-f"></i> Sign In with Facebook
+      </a>
+    {% elif provider.id == "google" %}
+      <a title="{{provider.name}}" class="btn-google list-group-item list-group-item-action sm_auth custom-google btn btn-danger" 
+         href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}">
+        <i class="fab fa-google"></i> Sign In with Gmail
+      </a>
+    {% else %}
+      <a title="{{provider.name}}" class="list-group-item list-group-item-action" 
+         href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}">
+        {{provider.name}}
+      </a>
+    {% endif %}
+  {% endfor %}
+</div>

@@ -20,6 +20,11 @@
         {% endif %}
         <button class="btn btn-primary" type="submit">{% trans "Sign Up" %} &raquo;</button>
       </form>
+      
+      <hr> <!-- Linha horizontal para separar o formulário do botão de autenticação -->
+      
+      <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-google">Signup with Google</a>
+      
     </div>
   </div>
 </div>
