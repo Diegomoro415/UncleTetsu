@@ -18,12 +18,19 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
+from allauth.socialaccount.providers.google import views as google_views
+
+app_name = 'uncletetsu'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('summernote/', include('django_summernote.urls')),
     path('', include('tetsu_app.urls')),
     path('accounts/', include('allauth.urls')),
+    path('accounts/google/login/',
+         google_views.oauth2_login, name='google_login'),
+    path('accounts/google/callback/',
+         google_views.oauth2_callback, name='google_callback'),
 ]
 
 if settings.DEBUG:

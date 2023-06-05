@@ -7,27 +7,60 @@
 {% block content %}
 <div class="container">
   <div class="row">
-    <div class="col-md-6 offset-md-3">
-      <h1>{% trans "Sign Up" %}</h1>
-
-      <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
-
-      <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
-        {% csrf_token %}
-        {{ form.as_p }}
-        {% if redirect_field_value %}
-        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-        {% endif %}
-        <button class="btn btn-primary" type="submit">{% trans "Sign Up" %} &raquo;</button>
-      </form>
-      
-      <hr> <!-- Linha horizontal para separar o formulário do botão de autenticação -->
-      
-      <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-google">Signup with Google</a>
-      
+    <div class="col-md-10 mt-3 offset-md-2 d-flex justify-content-center">
+      <div class="col-md-8">
+        <h3>{% trans "Sign Up" %}</h3>
+  
+        <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+        
+        <form class="signup" id="signup_form" method="post" action="{% url 'account_login' %}">
+          {% csrf_token %}
+          
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label" for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
+            <div class="col-sm-9">
+              {{ form.username }}
+            </div>
+          </div>
+          
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label" for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+            <div class="col-sm-9">
+              {{ form.email }}
+            </div>
+          </div>
+          
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label" for="{{ form.password1.id_for_label }}">{{ form.password1.label }}</label>
+            <div class="col-sm-9">
+              {{ form.password1 }}
+            </div>
+          </div>
+          
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label" for="{{ form.password2.id_for_label }}">{{ form.password2.label }}</label>
+            <div class="col-sm-9">
+              {{ form.password2 }}
+            </div>
+          </div>
+          
+          {% if redirect_field_value %}
+            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+          {% endif %}
+          
+          <div class="form-group row">
+            <div class="col-sm-9 offset-sm-3">
+              <button class="btn btn-primary" type="submit">{% trans "Sign Up" %} &raquo;</button>
+            </div>
+          </div>
+        </form>
+        
+        <hr>
+        <a href="{% url 'facebook_login' %}" class="btn-facebook list-group-item list-group-item-action sm_auth custom-facebook btn btn-primary">Signup with Facebook</a>
+        <a href="{% url 'google_login' %}" class="btn-google list-group-item list-group-item-action sm_auth custom-google btn btn-danger">Signup with Google</a>
+        <hr>
+      </div>
     </div>
   </div>
 </div>
-<br>
-<br>
 {% endblock %}
