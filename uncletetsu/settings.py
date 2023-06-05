@@ -31,7 +31,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['tetsu.heroku.com', 'localhost',
+ALLOWED_HOSTS = ['tetsu.herokuapp.com', 'localhost',
                  '8000-diegomoro415-uncletetsu-vpvz15y3sn.us2.codeanyapp.com']
 
 SITE_ID = 8
@@ -40,6 +40,8 @@ AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
     "allauth.account.auth_backends.AuthenticationBackend",
 )
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Application definition
 
@@ -99,8 +101,8 @@ TEMPLATES = [
 SOCIALACCOUNT_PROVIDERS = {
     'facebook': {
         'APP': {
-            'client_id': 'seu_client_id_do_facebook',
-            'secret': 'seu_secret_do_facebook',
+            'client_id': os.environ.get('FACEBOOK_ID'),
+            'secret': os.environ.get('FACEBOOK_SECRET'),
         }
     },
     'google': {

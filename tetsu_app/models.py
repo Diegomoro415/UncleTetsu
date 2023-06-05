@@ -1,4 +1,5 @@
 from django.db import models
+from allauth.socialaccount.models import SocialAccount
 from django.contrib.auth.models import User
 from django.utils import timezone
 

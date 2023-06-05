@@ -6,7 +6,6 @@
 {% block head_title %}{% trans "Sign In" %}{% endblock %}
 
 {% block content %}
-
 <div class="container">
   <div class="row">
     <div class="col-md-6 offset-md-3">
@@ -30,9 +29,9 @@
         </form>
         <br>
         <div class="socialaccount_ballot">
-          <ul class="socialaccount_providers">
+          <div class="list-group">
             {% include "socialaccount/snippets/provider_list.html" with process="login" %}
-          </ul>
+          </div>
         </div>
 
         {% include "socialaccount/snippets/login_extra.html" %}
