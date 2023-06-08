@@ -2,23 +2,29 @@
 
 {% get_providers as socialaccount_providers %}
 
-<div class="list-group">
+<div class="list-group text-center">
   {% for provider in socialaccount_providers %}
     {% if provider.id == "facebook" %}
-      <a title="{{provider.name}}" class="btn-facebook list-group-item list-group-item-action sm_auth custom-facebook btn btn-primary" 
-         href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}">
-        <i class="fab fa-facebook-f"></i> Sign In with Facebook
-      </a>
+      <div class="d-flex justify-content-center">
+        <a title="{{provider.name}}" class="btn-facebook list-group-item list-group-item-action sm_auth custom-facebook btn btn-primary" 
+           href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}">
+          <i class="fab fa-facebook-f"></i> Sign In with Facebook
+        </a>
+      </div>
     {% elif provider.id == "google" %}
-      <a title="{{provider.name}}" class="btn-google list-group-item list-group-item-action sm_auth custom-google btn btn-danger" 
-         href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}">
-        <i class="fab fa-google"></i> Sign In with Gmail
-      </a>
+      <div class="d-flex justify-content-center">
+        <a title="{{provider.name}}" class="btn-google list-group-item list-group-item-action sm_auth custom-google btn btn-danger" 
+           href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}">
+          <i class="fab fa-google"></i> Sign In with Gmail
+        </a>
+      </div>
     {% else %}
-      <a title="{{provider.name}}" class="list-group-item list-group-item-action" 
-         href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}">
-        {{provider.name}}
-      </a>
+      <div class="d-flex justify-content-center">
+        <a title="{{provider.name}}" class="list-group-item list-group-item-action" 
+           href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}">
+          {{provider.name}}
+        </a>
+      </div>
     {% endif %}
   {% endfor %}
 </div>

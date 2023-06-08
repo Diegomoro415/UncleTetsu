@@ -1,9 +1,9 @@
 from django.db import models
-from allauth.socialaccount.models import SocialAccount
 from django.contrib.auth.models import User
+from cloudinary.models import CloudinaryField
 from django.utils import timezone
+import uuid
 
-# Create your models here.
 
 STATUS = ((0, "Draft"), (1, "Published"))
 
@@ -24,8 +24,10 @@ class Post(models.Model):
     title = models.CharField(max_length=255, unique=True)
     slug = models.CharField(max_length=255, unique=True)
     author = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="review_post"
-    )
+        User,
+        on_delete=models.CASCADE,
+        related_name="review_post"
+        )
     excerpt = models.TextField(blank=True)
     updated_on = models.DateTimeField(auto_now=True)
     content = models.TextField()
@@ -54,26 +56,31 @@ class Table(models.Model):
     max_seats = models.IntegerField()
     available = models.BooleanField()
 
+    def __str__(self):
+        return self.table_name
+
 
 class Reservation(models.Model):
-    created_date = models.DateField()
-    request_date = models.DateField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     table = models.ForeignKey(Table, on_delete=models.CASCADE)
-    guest = models.CharField(max_length=255)
-    status = models.CharField(max_length=255)
-    seats = models.IntegerField()
-    guest_count = models.IntegerField()
+    num_people = models.IntegerField(default=2, blank=False, null=False)
+    date = models.DateField(blank=False, null=False)
+    request_date = models.DateField(null=True)
+    time = models.TimeField(
+        default=timezone.now,
+        blank=False,
+        null=False
+    )
+    reservation_id = models.UUIDField(
+        default=uuid.uuid4,
+        unique=True,
+        editable=False
+    )
+    created_date = models.DateTimeField(auto_now_add=True)
+    status = models.BooleanField(default=True)
 
-
-class User(models.Model):
-    password = models.CharField(max_length=255)
-    last_login = models.DateTimeField()
-    is_superuser = models.BooleanField()
-    username = models.CharField(max_length=255)
-    first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length=255)
-    email = models.EmailField()
-    date_joined = models.DateTimeField()
+    def __str__(self):
+        return str(self.reservation_id)
 
 
 class Contact(models.Model):

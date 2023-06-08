@@ -1,8 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="container">
-        <h1>Bem-vindo à página de reservas!</h1>
-        <!-- Adicione o restante do conteúdo específico da página home aqui -->
-    </div>
+  <h1>Make a Reservation</h1>
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+  <br>
 {% endblock %}
