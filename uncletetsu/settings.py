@@ -32,7 +32,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = True
 
 ALLOWED_HOSTS = ['tetsu.herokuapp.com', 'localhost',
-                 '8000-diegomoro415-uncletetsu-vpvz15y3sn.us2.codeanyapp.com']
+                 '8000-diegomoro415-uncletetsu-yttgcadicl.us2.codeanyapp.com']
 
 SITE_ID = 8
 
@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'cloudinary',
     'django_summernote',
+    'menu',
     'tetsu_app',
 ]
 
